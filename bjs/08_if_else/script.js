@@ -6,6 +6,7 @@ let orderNumber = 1;
 let gameRun = true;
 
 const orderNumberField = document.getElementById('orderNumberField');
+const phraseRandom = document.getElementById('phraseRandom');
 const answerField = document.getElementById('answerField');
 
 orderNumberField.innerText = orderNumber;
@@ -36,11 +37,50 @@ document.getElementById('btnOver').addEventListener('click', function () {
         }
     }
 })
-
-document.getElementById('btnEqual').addEventListener('click', function () {
+// Add logic for less
+document.getElementById('btnLess').addEventListener('click', function () {
     if (gameRun){
-        answerField.innerText = `Я всегда угадываю\n\u{1F60E}`
-        gameRun = false;
+        if (maxValue === minValue){
+            const phraseRandom = Math.round( Math.random());
+            const answerPhrase = (phraseRandom === 1) ?
+                `Вы загадали неправильное число!\n\u{1F914}` :
+                `Я сдаюсь..\n\u{1F92F}`;
+
+            answerField.innerText = answerPhrase;
+            gameRun = false;
+        } else {
+            maxValue = answerNumber  - 1;
+            answerNumber  = Math.floor((maxValue + minValue) / 2);
+            orderNumber++;
+            orderNumberField.innerText = orderNumber;
+            answerField.innerText = `Вы загадали число ${answerNumber }?`;
+        }
     }
 })
 
+// Update logic for btnEqual
+document.getElementById('btnEqual').addEventListener('click', function () {
+    if (gameRun){
+        let phraseRandom = Math.round(Math.random() * 3);
+        let answerPhrase;
+        if (phraseRandom === 1) {
+                answerPhrase = 'Я всегда угадываю!\n\u{1F44C}';
+        } else if (phraseRandom === 2) {
+               answerPhrase = 'Угадал!\n\u{1F60E}';
+            } else {
+               answerPhrase = 'Это было просто\n\u{1F525}';
+            };
+        answerField.innerText = answerPhrase;
+        gameRun = true;
+    }
+})
+
+document.getElementById('btnRetry').addEventListener('click', function () {
+    minValue = parseInt(prompt('Минимальное знание числа для игры','0'));
+    maxValue = parseInt(prompt('Максимальное знание числа для игры','100'));
+    alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
+    orderNumberField.innerText = orderNumber;
+    answerNumber  = Math.floor((minValue + maxValue) / 2);
+    answerField.innerText = `Вы загадали число ${answerNumber }?`;
+
+})
