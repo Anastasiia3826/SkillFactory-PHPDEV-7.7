@@ -4,6 +4,13 @@ if (isNaN(minValue) || isNaN(maxValue)) {
     minValue = 1;
     maxValue = 100;
 }
+
+if (minValue < 1 || maxValue > 100) {
+    minValue = 1;
+    maxValue = 100;
+}
+
+
 alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
 let answerNumber  = Math.floor((minValue + maxValue) / 2);
 let orderNumber = 1;
