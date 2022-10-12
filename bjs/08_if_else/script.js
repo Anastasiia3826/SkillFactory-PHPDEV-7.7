@@ -80,6 +80,10 @@ document.getElementById('btnEqual').addEventListener('click', function () {
 document.getElementById('btnRetry').addEventListener('click', function () {
     minValue = parseInt(prompt('Минимальное знание числа для игры','0'));
     maxValue = parseInt(prompt('Максимальное знание числа для игры','100'));
+    if (isNaN(minValue) || isNaN(maxValue)) {
+        minValue = 1;
+        maxValue = 100;
+    }
     alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
     orderNumberField.innerText = orderNumber;
     answerNumber  = Math.floor((minValue + maxValue) / 2);
