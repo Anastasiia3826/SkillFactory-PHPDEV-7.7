@@ -75,6 +75,8 @@ document.getElementById('btnEqual').addEventListener('click', function () {
     }
 })
 
+// Update logic for btnRetry
+
 document.getElementById('btnRetry').addEventListener('click', function () {
     minValue = parseInt(prompt('Минимальное знание числа для игры','0'));
     maxValue = parseInt(prompt('Максимальное знание числа для игры','100'));
